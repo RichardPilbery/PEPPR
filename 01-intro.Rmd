@@ -1,0 +1,19 @@
+# Introduction {-}
+
+Falls in the community can have a serious impact on the health of people aged 65 and over. In around 5% of cases a fall leads to fracture and hospitalisation [@rubenstein_quality_2001]. Reducing falls and the associated risks to health is a priority for Public Health England, the Association of Ambulance Chief Executives and other partners [@public_health_england_falls_2017].
+
+A high proportion, 42.5%, of English ambulance service patients that have called for a fall are discharged at scene [@ocathain_understanding_2018]. Yorkshire Ambulance Service NHS Trust (YAS) ambulance clinicians are able to refer these patients to falls teams, within Leeds this is the Leeds Community Healthcare NHS Trust Leeds Intermediate Care Team (LICT), which receives between 70-100 referrals per month from YAS.
+
+At present, if a patient has been prescribed four or more medicines (polypharmacy) or is noted to have difficulty managing their medicines (e.g. stockpiling) there is no guidance for attending ambulance crews about raising concerns. This is significant, since polypharmacy is a known risk factor for falls [@dhalwani_association_2017] but is not currently the subject of any prevention strategy in the ambulance service.
+
+YAS, LICT and the Leeds GP confederation are working together on a novel project that seeks to link paramedics that have identified patients at risk of subsequent falls and that may have poor medicines management at home, with pharmacists who will undertake a clinical medication review, to promote the safe use of medicines in falls prevention. This project is called Pharmacist Review of medications following a Fall attended by the AmbulanCE Services (PREFACES) and will run for 11 months.
+
+While it is undisputed that medicines are beneficial to health, medication non-adherence is reported to be the leading cause of preventable morbidity and mortality [@goldberg_patient_2009; @keeley_effects_2013]. While initiatives such as clinical medication reviews have been shown to improve the quality use of medications and health outcomes [@jokanovic_clinical_2016], non-adherence remains a significant issue. Research has been conducted into various aspects of patients and their medicines, and there are a variety of validated tools to explore patient satisfaction with their medicines, medicines management, and medicine-related quality of life (Katusiime, Corlett, Reeve, & Krska, 2016). However, none of these tools really address how patients feel about their medicines. This may be an important omission, but to date there is limited research into this specific aspect of patients and their medicines [@goldberg_patient_2009; @rosenbaum_beyond_2015].
+
+
+## Aim and Objectives {-}
+
+This study seeks to understand how patients feel about their medicines before and after receiving a clinical medication review following referral by the ambulance service.
+
+The primary objective was to determine the positive change in emotion felt by patients following a pharmacist-led clinical medication review. The secondary objective was to identify whether the steps taken during a pharmacist-led clinical medication review, such as changing or stopping medicines, affect how patients feel about their medicines.
+

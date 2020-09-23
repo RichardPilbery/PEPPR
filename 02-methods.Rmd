@@ -1,0 +1,53 @@
+# Methods {-}
+
+This study utlised an online survey to collate responses from clinicians who work in one  regional NHS Ambulance Trust. The online survey consisted of a front page explaining the study and contained a link to the participant information sheet. Participants were asked to indicate their consent to participate using an online form prior to commencing the 12 question online survey (Supplementary 1).
+
+## Setting {-}
+
+YAS provides 24-hour emergency and health care services for the county of Yorkshire in the north of England. The county has a population of approximately five million, spread over almost 6000 square miles of varied terrain, included isolated moors and dales, coastline and heavily populated urban areas. In 2018/19 YAS received more than 998,500 emergency calls and responded to 798,968 incidents by either sending clinicians to scene or by providing assessment and advice over the telephone.
+
+## Participants and recruitment {-}
+
+Participants consisted of patients registered with a GP in the Leeds area, who agreed to be referred to the YAS falls pathway. **BIT ABOUT WHAT THE FALLS PATHWAY ENTAILS** YAS staff make around 70–100 falls referral pathways a month in the Leeds area and all patients were offered the opportunity to receive a pharmacist-led clinical medication review. 
+
+This study is part of a larger service evaluation of the PREFACES project. When the referral is made by the ambulance crew, the patient will be asked for permission for their contact details to be passed onto the research team. This permission will be documented on the referral outcome document that is returned by the ambulance service clinical team. If the patient has given permission, their contact details will be forwarded to the research paramedic for this study. Potential participants will be invited to take part in the study by post. They will be sent an invitation pack that contains a cover letter, information sheet and questionnaire. In addition, a separate consent form will be provided, for participants who are happy to be contacted with respect to a future research study. Finally, a stamped addressed envelope will also be provided to return the completed survey (and optionally, the consent form).
+
+Consent 
+All participants will be considered to have given their informed consent if the questionnaire is completed and posted back to the research study team. Written informed consent is optional, and only relates to being contacted for a future research study. This will be collected on a separate form from the data collection questionnaire form.
+6.3	Withdrawal criteria 
+Since the questionnaire can be completed anonymously, it will not be possible to determine which data belongs to a specific participant and so withdrawal will not be possible.
+
+Patients who are eligible for this study will have been previously identified as part of the PREFACES project. Verbal permission from the patient to be contacted by the research team will be obtained by the ambulance crew at time of referral. This will be documented on the referral outcome document that is returned by the YAS clinical team. A member of YAS clinical staff from the PREFACES project will forward the name and residential address of patients who have agreed to be contacted to the research paramedic for this study.
+A covering letter, participant information sheet, questionnaire and consent form, will be posted to potential participants. A stamped addressed envelope will be included to enable return of the completed booklet at no costs to participants.
+
+Data from questionnaires will be entered into the study spreadsheet and each response allocated a participant ID. The physical questionnaires will be stored securely on Trust premises and the electronic spreadsheet, stored securely on a Trust computer. 
+Returned consent forms will be stored securely by the sponsor separately from the questionnaires
+
+
+
+## Outcomes {-}
+
+The primary outcome measure was the 
+
+
+## Statistical analysis {-}
+
+### Sample size calculation {-}
+
+Based on consultation with a pharmacist, it is anticipated that 35% of patients who have a negative feeling towards their medicines before the review, will feel positive afterwards, and 15% who initially felt positive about their medicines will feel negative after the review. This means that the proportion of discordant pairs is 50%, with an odds ratio of positive emotion to negative emotion following the review of 2.3. To detect this change with an alpha of 5% and a power of 90% using the method outlined by Julious, Campbell, & Altman (1999), gives a sample size of 132 participants.
+
+### Primary outcome analysis {-}
+
+To determine whether there is a change in positive emotion felt by patients following a pharmacist-led clinical medication review, a comparison will be made between the proportions of patients who change their emotional state (negative to neutral, neutral to positive, positive to neutral or neutral to negative) before and after the review. The measures will be collapsed into either positive change, in the case of negative to neutral or neutral to positive emotions expressed before and after the review respectively, and negative change, in the case of positive to neutral or neutral to negative emotions expressed before and after the review respectively. A McNemar’s test will be undertaken to determine statistical significance.
+
+### Secondary outcome analysis {-}
+
+To identify whether activities that occur as part of a pharmacist-led clinical medication review have an effect on how patients feel about their medicines, the distribution of patient’s emotion with respect to their medicines, before and after the medication review, using ordinal logistic regression will be undertaken. Adjustments will be made for age, gender, ethnic group, how the review was undertaken, how patients felt during the review, whether they received advice or explanation and/or had medicines stopped or modified (altered dose, altered time of administration, or drug exchanged for another). 
+It is intended to utilise a proportional odds version of the cumulative logit model (also known as proportional odds model) for the analysis (Agresti, 2010), and the assumptions of proportional odds will be determined using the method outlined by (Harrell, 2001). In the event that these assumptions do not hold, the analysis will proceed using a partial proportions odds model (Peterson & Harrell, 1990).
+
+
+### Missing data {-}
+
+In the event that returned booklets are only partially completed, all complete responses will be included, and a tally kept of missing responses. The number of non-respondents will also be recorded.
+
+

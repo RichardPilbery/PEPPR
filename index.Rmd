@@ -1,0 +1,44 @@
+--- 
+title: "PEPPR"
+author: "Richard Pilbery"
+date: "`r Sys.Date()`"
+output: bookdown::word_document2
+documentclass: article
+bibliography: ['PEPPR refs.bib']
+papersize: a4
+site: bookdown::bookdown_site
+geometry: margin=2cm
+link-citations: yes
+
+---
+
+`r if (!knitr:::is_html_output()) '
+# The Patient Experience of a Paramedic–Pharmacist Referral pathway for clinical medication reviews {-} '`
+
+`r if (knitr:::is_html_output()) '
+# Preamble {-}
+'`
+
+## Author information {-}
+| **Richard Pilbery**
+| Research paramedic
+| Yorkshire Ambulance Service NHS Trust
+| Springhill, Brindley Way
+| Wakefield 41 Business Park
+| Wakefield
+| WF2 0XQ
+| ORCID: 
+| [https://orcid.org/0000-0002-5797-9788](https://orcid.org/0000-0002-5797-9788)
+| email: r.pilbery@nhs.net
+
+
+
+## Abstract {-}
+
+### Introduction {-}
+
+### Methods {-}
+ 
+### Results {-}
+
+### Conclusion {-}
