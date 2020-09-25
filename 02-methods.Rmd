@@ -43,6 +43,7 @@ To determine whether there is a change in positive emotion felt by patients foll
 ### Secondary outcome analysis {-}
 
 To identify whether activities that occur as part of a pharmacist-led clinical medication review have an effect on how patients feel about their medicines, the distribution of patient’s emotion with respect to their medicines, before and after the medication review, using ordinal logistic regression will be undertaken. Adjustments will be made for age, gender, ethnic group, how the review was undertaken, how patients felt during the review, whether they received advice or explanation and/or had medicines stopped or modified (altered dose, altered time of administration, or drug exchanged for another). 
+
 It is intended to utilise a proportional odds version of the cumulative logit model (also known as proportional odds model) for the analysis (Agresti, 2010), and the assumptions of proportional odds will be determined using the method outlined by (Harrell, 2001). In the event that these assumptions do not hold, the analysis will proceed using a partial proportions odds model (Peterson & Harrell, 1990).
 
 

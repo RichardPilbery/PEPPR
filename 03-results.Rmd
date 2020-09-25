@@ -9,6 +9,7 @@ editor_options:
   # Use pandoc for Word documents
   format="pandoc"
 
+
 knitr::opts_chunk$set(echo = F, message = F, warning = F, cache = F, fig.align = 'center', out.width = '90%', fig.width = 10)
 
 library(bookdown)
@@ -17,6 +18,138 @@ library(lubridate)
 library(tableone)
 library(readxl)
 library(yardstick)
+
+
+number_surveys_posted = 218
+
+questions = c(
+  "Age in years",
+  "Gender",
+  "Ethnic group",
+  "How many medicines were you taking?",
+  "Prior to the review, how did you feel about your medicines?",
+  "How was your medicines review undertaken?",
+  "How did you feel when the pharmacist spoke to you about your medicines?",
+  "How do you feel about the outcome of the review?",
+  "After the review, how do you feel about your medicines now?",
+  "Change in how respondent feels about medicines before/after review"
+)
+
+df <- readRDS('data/PEPPR.rds')
+
+df1 <- df %>%
+  select(-ID, -Notes, -aware_review, -Eleven, -Eight) %>%
+  mutate(
+    # Gender
+    Three = case_when(
+      grepl("English|Irish", Three) ~ paste0("White: ", Three),
+      Three == "Indian" ~ "Asian/Asian British: Indian",
+      TRUE ~ NA_character_
+    ),
+    # "How did you feel about your medicines?" BEFORE review
+    Five = case_when(
+      grepl("Hopeless|Insecure|Frustrated", Five) ~ "negative",
+      Five == "OK"                                ~ "neutral",
+      grepl("Grateful|Secure|Safe", Five)         ~ "positive",
+      TRUE                                        ~ NA_character_
+    ),
+    Ten = case_when(
+      grepl("Hopeless|Insecure|Frustrated", Ten)  ~ "negative",
+      Ten == "OK"                                 ~ "neutral",
+      grepl("Grateful|Secure|Safe", Ten)          ~ "positive",
+      TRUE                                        ~ NA_character_
+    ),
+    Seven = case_when(
+      grepl("Ignored|Disrespected|Frustrated", Seven) ~ "negative",
+      Seven == "OK"                                   ~ "neutral",
+      grepl("Empowered|Confident|Optimistic", Seven)  ~ "positive",
+      TRUE                                            ~ NA_character_
+    ),
+    Nine = case_when(
+      grepl("Ignored|Disrespected|Frustrated", Nine) ~ "negative",
+      Nine == "OK"                                   ~ "neutral",
+      grepl("Empowered|Confident|Optimistic", Nine)  ~ "positive",
+      TRUE                                           ~ NA_character_
+    ),
+    change_in_feeling = case_when(
+      Five == "positive" & grepl("negative|neutral", Ten) ~ "negative",
+      Five == "neutral" & Ten == "negative" ~ "negative",
+      Five == Ten ~ "neutral",
+      Five == "negative" & grepl("neutral|positive", Ten) ~ "positive",
+      Five == "neutral" & Ten == "positive" ~ "positive",
+      TRUE ~ NA_character_
+    )
+  )
+
+df2 <- df1
+colnames(df2) <- questions
+vars <- colnames(df2)
+# All are factor variables except for age
+factorVars <- colnames(df2)[-1]
+
+
+
+summary_table <- CreateTableOne(
+  vars = colnames(df2),
+  data = df2,
+  test = F,
+  factorVars = factorVars,
+  includeNA = T
+)
+
+library(yardstick)
+
+con_matrix <- df1 %>% filter(!is.na(Five) & !is.na(Ten)) %>% 
+  select(Five, Ten) %>% 
+  mutate_all(as.factor) %>% 
+  conf_mat(truth = Five, estimate = Ten, dnn = c("Post-review", "Pre-review")) 
+
+
+```
+
+Blurb
+
+
+```{r summarytable}
+
+kableone(print(summary_table, showAllLevels = T), format = format, caption = "Summary of survey responses")
+
+```
+
+
+```{r cmr-activity, fig.cap="Activities during CMR"}
+
+cmr_qn <- c(
+  "I was given advice about how to take medicines",
+  "The pharmacist explained my medicines to me",
+  "One or more medicines were stopped",
+  "One or more medicines had a change in dose",
+  "The time of day when I take a medicines was changed",
+  "One ore more of my medicines were changed for another medicine",
+  "No changes were made to my medicines"
+)
+
+df %>%
+  select(Six, Eight) %>%
+  na.omit() %>%
+  separate_rows(Eight, sep=",") %>%
+  count(Six, Eight) %>%
+  group_by(Eight) %>%
+  mutate(
+    total_n = sum(n),
+    name = case_when(
+      !is.na(as.integer(Eight)) ~ cmr_qn[as.integer(Eight)],
+      TRUE ~ "Don't rember"
+    )
+  ) %>%
+  ggplot(aes(x = fct_reorder(name, total_n, .desc = F), y = n, fill = Six)) +
+  geom_col(color = "grey50") +
+  scale_y_continuous(name = "Number of responses", labels = seq(0, 20, 2),breaks = seq(0,20,2)) +
+  scale_x_discrete(name = "Activity during review") +
+  coord_flip() +
+  theme_minimal() +
+  scale_fill_viridis_d(name = "Review type", breaks = c("Telephone", "F2F", "Don't Know"), labels = c("Telephone", "Face-to-face",  "Unknown")) +
+  theme(legend.position = "bottom",  text = element_text(size = 20))
 
 
 ```
