@@ -38,7 +38,7 @@ questions = c(
 df <- readRDS('data/PEPPR.rds')
 
 df1 <- df %>%
-  select(-ID, -Notes, -aware_review, -Eleven, -Eight) %>%
+  select(-ID, -Notes, -aware_review, -Eleven) %>%
   mutate(
     # Gender
     Three = case_when(
@@ -74,14 +74,19 @@ df1 <- df %>%
     change_in_feeling = case_when(
       Five == "positive" & grepl("negative|neutral", Ten) ~ "negative",
       Five == "neutral" & Ten == "negative" ~ "negative",
-      Five == Ten ~ "neutral",
+      Five == Ten ~ "no change",
       Five == "negative" & grepl("neutral|positive", Ten) ~ "positive",
       Five == "neutral" & Ten == "positive" ~ "positive",
       TRUE ~ NA_character_
+    ),
+    change_during_review = case_when(
+      Eight == "7" ~ "no",
+      is.na(Eight) ~ NA_character_,
+      TRUE ~ "yes"
     )
   )
 
-df2 <- df1
+df2 <- df1 %>% select(-change_during_review, -Eight)
 colnames(df2) <- questions
 vars <- colnames(df2)
 # All are factor variables except for age
@@ -99,15 +104,39 @@ summary_table <- CreateTableOne(
 
 library(yardstick)
 
-con_matrix <- df1 %>% filter(!is.na(Five) & !is.na(Ten)) %>% 
-  select(Five, Ten) %>% 
-  mutate_all(as.factor) %>% 
-  conf_mat(truth = Five, estimate = Ten, dnn = c("Post-review", "Pre-review")) 
 
+
+# McNemar Need to talk to Dawn about this...
+
+# paired_data <- df1 %>%
+#   filter(!is.na(change_in_feeling), change_in_feeling != "no change") %>%
+#   select(change_in_feeling) %>%
+#   mutate_all(as.factor) %>% 
+#   conf_mat(truth = Five, estimate = Ten, dnn = c("Post-review", "Pre-review"))
+
+# paired_data <- df1 %>%
+#   filter(Five != "neutral", Ten != "neutral") %>%
+#   select(Five, Ten) %>%
+#   mutate_all(as.factor) %>% 
+#   conf_mat(truth = Five, estimate = Ten, dnn = c("Post-review", "Pre-review"))
+
+#            Pre-review
+# Post-review negative positive
+#    negative        2        0
+#    positive        4        5
+
+#test <- matrix(c(2,0,0,0.0000000001,23,1,4,3,5), nrow=3, byrow = T)
+
+#mcnemar.test(test, correct = T)
+
+# 	McNemar's Chi-squared test with continuity correction
+# 
+# data:  paired_data$table
+# McNemar's chi-squared = 2.25, df = 1, p-value = 0.1336
 
 ```
 
-Blurb
+The first surveys were sent out on the 20th September 2019 and the last, on the 24th March 2020 when the study was paused due to the covid pandemic. Surveys included reviews conducted between the 7th August 2019 and 23rd March 2020. In total, 218/265 (82.3%) of patients who had received a CMR received a invitation pack. Following the study closure on the 23rd July 2020, we had received 48/218 (22.0%) surveys (Table \@ref(tab:summarytable)).
 
 
 ```{r summarytable}
@@ -116,18 +145,40 @@ kableone(print(summary_table, showAllLevels = T), format = format, caption = "Su
 
 ```
 
+Of the 48 responses, 37/48 provided responses relating to activities that occured during the review. In most cases no changes were made to medicines, but patients were frequently given advice about how to take their medicines (Figure \@ref(fig:cmr-activity)).
+
 
 ```{r cmr-activity, fig.cap="Activities during CMR"}
 
 cmr_qn <- c(
-  "I was given advice about how to take medicines",
-  "The pharmacist explained my medicines to me",
-  "One or more medicines were stopped",
-  "One or more medicines had a change in dose",
-  "The time of day when I take a medicines was changed",
-  "One ore more of my medicines were changed for another medicine",
+  "Advice about how to take medicines",
+  "Explanation of medicines",
+  "1+ medicines stopped",
+  "1+ medicines had a change in dose",
+  "Medicine administration time changed",
+  "1+ medicines were changed for another",
   "No changes were made to my medicines"
 )
+
+# df %>%
+#   select(Six, Eight) %>%
+#   na.omit() %>% count()
+
+
+summary_activity_df <- df %>%
+  dplyr::select(Six, Eight) %>%
+  na.omit() %>%
+  separate_rows(Eight, sep=",") %>%
+  count(Eight) %>%
+  mutate(
+        name = case_when(
+      !is.na(as.integer(Eight)) ~ cmr_qn[as.integer(Eight)],
+      TRUE ~ "Don't remember"
+    )
+  ) %>%
+  arrange(desc(n))
+
+# 37 results included here
 
 df %>%
   select(Six, Eight) %>%
@@ -150,6 +201,126 @@ df %>%
   theme_minimal() +
   scale_fill_viridis_d(name = "Review type", breaks = c("Telephone", "F2F", "Don't Know"), labels = c("Telephone", "Face-to-face",  "Unknown")) +
   theme(legend.position = "bottom",  text = element_text(size = 20))
+
+
+```
+
+
+## Primary outcome
+
+Only 8 patients reported a change in emotion between pre- and post-review and in 7/8 (87.5%) of cases this was a positive change in emotion. Most patients expressed a neutral emotion which did not change as a result of the review (Table \@ref(tab:prim-outcome)).
+
+**NEED ADVICE FROM STATISTICIAN ABOUT MCNEMAR TEST**
+
+```{r prim-outcome}
+
+con_matrix <- df1 %>% filter(!is.na(Five) & !is.na(Ten)) %>% 
+  select(Five, Ten) %>% 
+  mutate_all(as.factor) %>% 
+  conf_mat(truth = Five, estimate = Ten, dnn = c("Post-review", "Pre-review")) 
+
+knitr::kable(con_matrix$table, format = format, caption = "Patient reported emotion pre- and post-medicine review")
+
+
+```
+
+
+## Secondary outcome
+
+Table \@ref(tab:olr-table) shows the results of the proportional odds model. Ethnicity was removed from the model since only two respondents reported an ethnicity other than 'White: English/Welsh/Scottish/N. Irish/British'. None of the coefficients appeared to significantly affect how patient's felt following a CMR.
+
+```{r ord-regression}
+
+#library(MASS)
+
+ord_df <- df1 %>% 
+  dplyr::select(change_in_feeling, One, Two, Three, Six, Seven, change_during_review) %>%
+  mutate_if(is.character, factor) %>%
+  mutate(
+    change_in_feeling = ordered(change_in_feeling, levels = c("negative", "no change", "positive"))
+  )
+
+fit <- MASS::polr(change_in_feeling ~ One + Two + Three + Six + Seven + change_during_review, data = ord_df, Hess = T)
+
+
+olr_result <- tidy(fit, exponentiate = T, conf.int = F, p.values = F)
+
+terms <- c("Age", "Male", "White:English", "Face-to-face", "Telephone", "Neutral", "Positive", "Changes during CMR", "negative|no change", "no change|positive")
+
+olr_result$term <- terms
+
+
+# A tibble: 10 x 5
+#   term               estimate std.error statistic conf.low conf.high coef.type  
+#   <chr>                 <dbl>     <dbl>     <dbl>    <dbl>     <dbl> <chr>      
+# 1 Age                   1.00       0.05     0.058    0.91       1.11 coefficient
+# 2 Male                  1.01       1.01     0.009    0.129      7.89 coefficient
+# 3 Face-to-face          0.83       1.18    -0.159    0.082     10.1  coefficient
+# 4 Telephone             0.629      1.29    -0.36     0.046      9.33 coefficient
+# 5 Neutral               0.47       1.67    -0.453    0.013     16.7  coefficient
+# 6 Positive              0.136      1.84    -1.08     0.002      5.85 coefficient
+# 7 Changes during CMR    1.19       1.09     0.157    0.145     12.3  coefficient
+# 8 negative|no change    0         25.8     -0.43    NA         NA    scale      
+# 9 no change|positive    1.36       4.64     0.066   NA         NA    scale      
+
+fit2 <- MASS::polr(change_in_feeling ~ One + Two + Six + Seven + change_during_review, data = ord_df, Hess = T)
+
+olr_result2 <- tidy(fit2, exponentiate = T, conf.int = T) %>%
+  mutate_if(is.double, round, 2)
+
+terms2 <- c("Age", "Male", "Face-to-face", "Telephone", "Neutral", "Positive", "Changes during CMR", "negative|no change", "no change|positive")
+
+olr_result2$term <- terms2
+
+
+# A tibble: 9 x 7
+#   term                    estimate std.error statistic conf.low conf.high coef.type  
+#   <chr>                      <dbl>     <dbl>     <dbl>    <dbl>     <dbl> <chr>      
+# 1 One                        1.00       0.05     0.058    0.91       1.11 coefficient
+# 2 TwoMale                    1.01       1.01     0.009    0.129      7.89 coefficient
+# 3 SixF2F                     0.83       1.18    -0.159    0.082     10.1  coefficient
+# 4 SixTelephone               0.629      1.29    -0.36     0.046      9.33 coefficient
+# 5 Sevenneutral               0.47       1.67    -0.453    0.013     16.7  coefficient
+# 6 Sevenpositive              0.136      1.84    -1.08     0.002      5.85 coefficient
+# 7 change_during_reviewyes    1.19       1.09     0.157    0.145     12.3  coefficient
+# 8 negative|no change         0         25.8     -0.43    NA         NA    scale      
+# 9 no change|positive         1.36       4.64     0.066   NA         NA    scale    
+
+```
+
+```{r olr-table}
+
+knitr::kable(olr_result2 %>% filter(coef.type == "coefficient") %>% mutate(`95% CI` = paste0(conf.low,'--',conf.high)) %>% dplyr::select(term, estimate, `95% CI`),
+             format = format, 
+             caption = "Proportional odds model")
+
+```
+
+## Raw results
+
+Results of summary(fitted model) and then tidy equivalent with coefficients exponentiated.
+
++ One = Age in years
++ Two = gender
++ Three = ethnicity
++ Six = Method of review
++ Seven = Emotion during review
++ change_in_review = Whether any change (apart from ‘no change to medicines’ was selected)
+
+
+```{r message=T}
+
+summary(fit)
+
+# Model with ethnicity
+olr_result %>% select(-coef.type)
+
+
+# Mode without ethnicity
+
+summary(fit2)
+
+olr_result2 %>% select(-coef.type)
 
 
 ```
