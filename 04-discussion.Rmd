@@ -1,3 +1,22 @@
 # Discussion {-}
 
-Discussion
+Most ambulance services in England have had a falls referral pathway in place for up to 10 years [@darnell_elderly_2012]. In YAS, the falls referral leads to a multi-factorial risk assessment and intervention (where necessary) as recommended by the National Institute for Health and Care Excellence [@national_institute_for_health_and_care_excellence_falls_2013]. While previous research has examined the impact of ambulance clinician referral of patients who fall but not conveyed to hospital, typically the medication review has not been isolated and its impact determined.
+
+
+Couple of studies that might be useful
+
+Mikolaizak 2017
+RCT evaluating direct support for patients including physio, OT, optometrist, medication review by pharmacist and getriatric dr via outpatient departments  vs written guidance following risk assessment.
+Patients referred by study paramedics (Sydney, Australia) - eligibility include patients 65+ years who had fallen and were not conveyed (note residential/nursing home patient excluded as were patients with dementia and non-English speakers)
+No difference between groups with respect to subsequent falls, injurous falls and health service use. However, pre-protocol analysis identified that patients who adhered to guidance did have significantly lower rates of further falls.
+
+Snooks 2017
+Cluster RCT evaluating a falls protocol to assist paramedics in making non-conveyance decisions and appropriateness of falls referral. However no further explanation of activities following the falls referral e.g. medication review.
+No difference between referral group and those taken to ED by control group paramedics with respect to subsequent emergency contact or death.
+Not sure that this is a ringing endorsement of the protocol frankly!
+
+
+
+
+
+

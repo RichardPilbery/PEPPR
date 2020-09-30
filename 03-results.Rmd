@@ -136,7 +136,7 @@ library(yardstick)
 
 ```
 
-The first surveys were sent out on the 20th September 2019 and the last, on the 24th March 2020 when the study was paused due to the covid pandemic. Surveys included reviews conducted between the 7th August 2019 and 23rd March 2020. In total, 218/265 (82.3%) of patients who had received a CMR received a invitation pack. Following the study closure on the 23rd July 2020, we had received 48/218 (22.0%) surveys (Table \@ref(tab:summarytable)).
+The first surveys were sent out on the 20th September 2019 and the last, on the 24th March 2020, when the study was paused due to the covid pandemic. Surveys included reviews conducted between the 7th August 2019 and 23rd March 2020. In total, 218/265 (82.3%) of patients who had a CMR received a invitation pack. At the time of study closure on the 23rd July 2020, we had received 48/218 (22.0%) surveys (Table \@ref(tab:summarytable)).
 
 
 ```{r summarytable}
@@ -145,7 +145,7 @@ kableone(print(summary_table, showAllLevels = T), format = format, caption = "Su
 
 ```
 
-Of the 48 responses, 37/48 provided responses relating to activities that occured during the review. In most cases no changes were made to medicines, but patients were frequently given advice about how to take their medicines (Figure \@ref(fig:cmr-activity)).
+Of the 48 responses, 37/48 provided responses relating to activities that occured during the review. In most cases no changes were made to medicines, but patients were frequently given advice about how to take their medicines (Figure \@ref(fig:cmr-activity)). However, almost 30% did not know how their CMR was undertaken. It transpired that many reviews **PERHAPS INCLUDE ACTUAL NUMBER FROM PREFACES?** were actually notes-based, where the pharmacist reviews the patient's medical and prescibing records. It is not routine practice to contact patients inform them that this has taken place.
 
 
 ```{r cmr-activity, fig.cap="Activities during CMR"}
@@ -206,7 +206,7 @@ df %>%
 ```
 
 
-## Primary outcome
+## Emotions pre- and post-review
 
 Only 8 patients reported a change in emotion between pre- and post-review and in 7/8 (87.5%) of cases this was a positive change in emotion. Most patients expressed a neutral emotion which did not change as a result of the review (Table \@ref(tab:prim-outcome)).
 
@@ -227,7 +227,7 @@ knitr::kable(con_matrix$table, format = format, caption = "Patient reported emot
 
 ## Secondary outcome
 
-Table \@ref(tab:olr-table) shows the results of the proportional odds model. Ethnicity was removed from the model since only two respondents reported an ethnicity other than 'White: English/Welsh/Scottish/N. Irish/British'. None of the coefficients appeared to significantly affect how patient's felt following a CMR.
+Table \@ref(tab:olr-table) shows the results of the proportional odds model. Ethnicity was removed from the model since only two respondents reported an ethnicity other than 'White: English/Welsh/Scottish/N. Irish/British'. None of the included terms appeared to significantly affect how patient's felt following a CMR.
 
 ```{r ord-regression}
 
@@ -296,31 +296,34 @@ knitr::kable(olr_result2 %>% filter(coef.type == "coefficient") %>% mutate(`95% 
 
 ```
 
-## Raw results
-
-Results of summary(fitted model) and then tidy equivalent with coefficients exponentiated.
-
-+ One = Age in years
-+ Two = gender
-+ Three = ethnicity
-+ Six = Method of review
-+ Seven = Emotion during review
-+ change_in_review = Whether any change (apart from ‘no change to medicines’ was selected)
 
 
-```{r message=T}
 
-summary(fit)
-
-# Model with ethnicity
-olr_result %>% select(-coef.type)
+```{r}
 
 
-# Mode without ethnicity
-
-summary(fit2)
-
-olr_result2 %>% select(-coef.type)
+# ## Raw results
+# 
+# Results of summary(fitted model) and then tidy equivalent with coefficients exponentiated.
+# 
+# + One = Age in years
+# + Two = gender
+# + Three = ethnicity
+# + Six = Method of review
+# + Seven = Emotion during review
+# + change_in_review = Whether any change (apart from ‘no change to medicines’ was selected)
+# 
+# summary(fit)
+# 
+# # Model with ethnicity
+# olr_result %>% select(-coef.type)
+# 
+# 
+# # Mode without ethnicity
+# 
+# summary(fit2)
+# 
+# olr_result2 %>% select(-coef.type)
 
 
 ```

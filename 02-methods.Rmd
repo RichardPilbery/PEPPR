@@ -8,12 +8,14 @@ YAS provides 24-hour emergency and health care services for the county of Yorksh
 
 ## Participants and recruitment {-}
 
-Participants consisted of patients registered with a GP in the Leeds area, who agreed to be referred to the YAS falls pathway. **BIT ABOUT WHAT THE FALLS PATHWAY ENTAILS** YAS staff make around 70–100 falls referral pathways a month in the Leeds area and all referred patients were offered the opportunity to receive a pharmacist-led clinical medication review. 
+Participants were eligible if they were registered with a GP in the Leeds area, and agreed to be referred to the YAS falls pathway. YAS staff make around 70–100 falls referral pathways a month in the Leeds area and all referred patients were offered the opportunity to receive a pharmacist-led clinical medication review during the evaluation period as part of the PREFACES project.
 
-This study is part of a larger service evaluation of the PREFACES project. When the referral was made by the ambulance crew, the patient was asked for permission for their contact details to be passed onto the research team. Potential participants were invited to take part in the study by post and sent an invitation pack containing a cover letter, information sheet, questionnaire and a stamped addressed envelope.
+**? INCLUDE SOMETHING ABOUT WHAT THE FALLS PATHWAY ENTAILS** 
+
+When a referral was made by the ambulance crew, the patient was asked for permission for their contact details to be passed onto the research team. Potential participants were subequently invited to take part in the study by post and sent an invitation pack containing a cover letter, information sheet, survey and a stamped addressed envelope.
 
 ### Consent 
-All participants were considered to have given their informed consent if the questionnaire was completed and posted back to the research study team. Since the questionnaire was completed anonymously, it was not be possible to determine which data belongs to a specific participant and so withdrawal was not possible. This was explained to particpants in the cover letter.
+All participants were considered to have given their informed consent if the survey was completed and posted back to the research study team. Since the survey was completed anonymously, it was not be possible to determine which data belongs to a specific participant and so withdrawal was not possible. This was explained to particpants in the cover letter.
 
 
 ## Statistical analysis {-}
@@ -24,13 +26,13 @@ Based on consultation with the study pharmacist, it was anticipated that 35% of 
 
 ### Primary outcome analysis {-}
 
-The primary outcome was the proportion of patients who express a positive change in emotion relating to how they feel about their medicines, following a pharmacist-led clinical medication review. To determine this, a comparison was made between the proportions of patients who change their emotional state (negative to neutral, neutral to positive, positive to neutral or neutral to negative) before and after the review. The measures were subsequently collapsed into either positive change, in the case of negative to neutral or neutral to positive emotions expressed before and after the review respectively, and negative change, in the case of positive to neutral or neutral to negative emotions expressed before and after the review respectively. A McNemar’s test was undertaken to determine statistical significance.
+The primary outcome was the proportion of patients who expressed a positive change in emotion relating to how they feel about their medicines following a pharmacist-led CMR. To determine this, a comparison was made between the proportions of patients who changed their emotional state (negative to neutral, neutral to positive, positive to neutral or neutral to negative) before and after the review. The measures were subsequently collapsed into either positive change, in the case of negative to neutral or neutral to positive emotions expressed before and after the review respectively, and negative change, in the case of positive to neutral or neutral to negative emotions expressed before and after the review respectively. A McNemar’s test was undertaken to determine statistical significance.
 
 ### Secondary outcome analysis {-}
 
-To identify whether activities that occur as part of a pharmacist-led clinical medication review have an effect on how patients feel about their medicines (the secondary outcome measure), the distribution of patient’s emotion with respect to their medicines, before and after the medication review, using ordinal logistic regression was undertaken. Adjustments were made for age, gender, ethnic group, how the review was undertaken, how patients felt during the review, and whether they received advice or explanation and/or had medicines stopped or modified (altered dose, altered time of administration, or drug exchanged for another). 
+To identify whether activities that occured as part of a pharmacist-led clinical CMR had an effect on how patients felt about their medicines (the secondary outcome measure), the distribution of patient’s emotion with respect to their medicines, before and after the medication review, using ordinal logistic regression was undertaken. Adjustments were made for age, gender, ethnic group, how the review was undertaken, how patients felt during the review, and whether they received advice or explanation and/or had medicines stopped or modified.
 
-We utilised a proportional odds version of the cumulative logit model (also known as proportional odds model) for the analysis [@agresti_analysis_2010], and the assumptions of proportional odds will be determined using the method outlined by @harrell_regression_2001. In the event that these assumptions do not hold, the analysis will proceed using a partial proportions odds model [@peterson_partial_1990].
+We utilised a proportional odds version of the cumulative logit model (also known as proportional odds model) for the analysis [@agresti_analysis_2010], and the assumptions of proportional odds will be determined using the method outlined by @harrell_regression_2001. In the event that these assumptions did not hold, the analysis we planned to utilise a partial proportions odds model [@peterson_partial_1990].
 
 
 ### Missing data {-}
